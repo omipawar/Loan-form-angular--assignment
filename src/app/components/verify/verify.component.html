@@ -1,0 +1,69 @@
+<div class="container-fluid">
+  <div class="container">
+    <p class="display-5">Form to apply for a Personal Loan</p>
+  </div>
+  <br>
+  <div class="container mt-2">
+    <form class="col-lg-6" [formGroup]="formData" (ngSubmit)="postData(formData.value)">
+      <div>
+        <label class="form-label h4">City</label>
+        <input type="text" class="form-control" placeholder="City " name="city" formControlName="city"
+          [(ngModel)]="city">
+
+        <span *ngIf="formData.controls.city.invalid && formData.controls.city.touched">Please enter city</span>
+      </div>
+      <div>
+        <label class="form-label h4 mt-4">Pan Number</label>
+        <input type="text" class="form-control" placeholder="Pan Number" name="panNumber" formControlName="panNumber"
+          [(ngModel)]="panNumber">
+        <span *ngIf="formData.controls.panNumber.invalid && formData.controls.panNumber.touched">Please enter valid Pan
+          Number</span>
+      </div>
+      <div>
+        <label class="form-label h4 mt-4">Full Name</label>
+        <input type="text" class="form-control" placeholder="Full Name" name="fullname" formControlName="fullname"
+          [(ngModel)]="fullname">
+        <span *ngIf="formData.controls.fullname.invalid && formData.controls.fullname.touched">Please enter Name</span>
+      </div>
+      <div>
+        <label class="form-label h4 mt-4">Email</label>
+        <input type="email" class="form-control" placeholder="Email" name="email" formControlName="email"
+          [(ngModel)]="email">
+        <span *ngIf="formData.controls.email.invalid && formData.controls.email.touched">Please enter valid Email</span>
+      </div>
+      <div>
+        <label class="form-label h4 mt-4">Mobile Number</label>
+        <input type="number" class="form-control" placeholder="Mobile Number" (input)="apicall($event)" name="mobile"
+          formControlName="mobile" [(ngModel)]="mobile">
+        <span *ngIf="formData.controls.mobile.invalid && formData.controls.mobile.touched">Please enter
+          valid Mobile Number</span>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary mt-3 p-2 ms-3" [disabled]="disablereset == false"
+          value="{{otpcount}}" (click)="resendotp()" >Resend
+          OTP</button>
+        &nbsp;
+        <p *ngIf="isresend == true">
+          <countdown [config]="{leftTime:30}"></countdown>
+        </p>
+        <!-- <button type="button" class="btn btn-primary mt-3 p-2 " [disabled]="formData.controls.mobile.invalid"
+          (click)="sendData()">Get OTP</button> -->
+
+      </div>
+      <div>
+        <label class="form-label h4 mt-4">OTP</label>
+        <input type="text" class="form-control" placeholder="OTP" name="otp" formControlName="otp"
+          [readonly]="isread == true">
+        <span *ngIf="formData.controls.otp.invalid && formData.controls.otp.touched">Please enter valid OTP</span>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary mt-3 p-2 " [disabled]="!formData.valid">Submit</button>
+      </div>
+    </form>
+
+
+  </div>
+</div>
+<!-- <div class="container">
+  <countdown [config]="{leftTime:30}"></countdown>
+</div> -->
